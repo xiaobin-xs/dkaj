@@ -1,0 +1,10 @@
+*__pycache__*
+.vscode*
+*.pt
+*.pkl
+out_baselines*
+out_dkaj*
+data/seer*.csv
+test-and-clean.ipynb
+results_*.csv
+visualization/*
