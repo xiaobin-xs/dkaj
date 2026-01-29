@@ -8,7 +8,6 @@ import torch
 import torchtuples as tt
 from dsm import DeepSurvivalMachines
 from nfg import NeuralFineGray
-from desurv import DeSurv
 from hazardous import SurvivalBoost
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.utils.validation import check_array
@@ -122,28 +121,6 @@ class DeepSurvivalMachinesWrap(DeepSurvivalMachines):
 
 
 class NeuralFineGrayWrap(NeuralFineGray):
-    def save_net(self, filename):
-        torch.save(self.torch_model.state_dict(), filename)
-
-    def load_net(self, filename, x=None, t=None, e=None):
-        """
-        Load model weights from a .pt file.
-        You must call fit with data to initialize torch_model before loading weights, 
-        unless torch_model is already initialized.
-        Args:
-            filename (str): Path to the .pt file.
-            x, t, e: Optional. If the model is not fitted yet, you must provide dummy data to initialize.
-        """
-        if not hasattr(self, 'torch_model') or not self.fitted:
-            if x is None or t is None or e is None:
-                raise ValueError("Provide x, t, e to initialize the model before loading weights.")
-            # Fit on dummy data to initialize torch_model
-            self.fit(x, t, e, n_iter=1)
-        self.torch_model.load_state_dict(torch.load(filename))
-        self.fitted = True
-
-
-class DeSurvWrap(DeSurv):
     def save_net(self, filename):
         torch.save(self.torch_model.state_dict(), filename)
 
