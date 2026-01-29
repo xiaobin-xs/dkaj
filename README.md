@@ -2,6 +2,8 @@
 Code for the paper:
 > Xiaobin Shen* and George H. Chen*. "Deep Kernel Aalen–Johansen Estimator: An Interpretable and Flexible Neural Net Framework for Competing Risks." *Machine Learning for Health* 2025. [[arXiv](https://arxiv.org/abs/2512.08063)]
 
+🏆 Best Paper Award (Models and Methods) @ ML4H December, 2025
+
 DKAJ is an interpretable competing-risks model that generalizes the classical Aalen–Johansen (AJ) estimator to produce individual-level cumulative incidence functions (CIFs) via a learned kernel / representation.
 
 ## Key idea (interpretability)
