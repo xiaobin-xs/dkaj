@@ -68,15 +68,15 @@ Experiment scripts read hyperparameters and dataset settings from config files.
 
 #### Main Config Files
 
-- **`config_dkaj.ini`**: Default DKAJ configuration (multiple datasets, parameter grids)
-- **`config_dkaj_train_size.ini`**: DKAJ configuration with varying training set sizes
-- **`config.ini`**: Standard baseline methods configuration
-- **`config_train_size.ini`**: Baseline methods with varying training set sizes
+- **`dkaj.ini`**: Default DKAJ configuration (multiple datasets, parameter grids)
+- **`dkaj_train_size.ini`**: DKAJ configuration with varying training set sizes
+- **`baseline.ini`**: Standard baseline methods configuration
+- **`baseline_train_size.ini`**: Baseline methods with varying training set sizes
 
 #### Full DKAJ Pipeline
 
 ```bash
-python experiments/run_dkaj.py config_dkaj.ini
+python experiments/run_dkaj.py config/dkaj.ini
 ```
 
 #### Baseline Methods
@@ -84,13 +84,13 @@ python experiments/run_dkaj.py config_dkaj.ini
 Run individual baseline methods with standard configuration:
 
 ```bash
-python experiments/run_csCox.py config.ini
-python experiments/run_FG.py config.ini
-python experiments/run_rsfcr.py config.ini
-python experiments/run_deephit.py config.ini
-python experiments/run_dsm.py config.ini
-python experiments/run_neuralFG.py config.ini
-python experiments/run_survboost.py config.ini
+python experiments/run_csCox.py config/baseline.ini
+python experiments/run_FG.py config/baseline.ini
+python experiments/run_rsfcr.py config/baseline.ini
+python experiments/run_deephit.py config/baseline.ini
+python experiments/run_dsm.py config/baseline.ini
+python experiments/run_neuralFG.py config/baseline.ini
+python experiments/run_survboost.py config/baseline.ini
 ```
 
 #### Experiments with Varying Training Size
@@ -98,14 +98,14 @@ python experiments/run_survboost.py config.ini
 To evaluate methods on datasets with different training set sizes:
 
 ```bash
-python experiments/run_dkaj.py config_dkaj_train_size.ini
-python experiments/run_csCox.py config_train_size.ini
-python experiments/run_FG.py config_train_size.ini
-python experiments/run_rsfcr.py config_train_size.ini
-python experiments/run_deephit.py config_train_size.ini
-python experiments/run_dsm.py config_train_size.ini
-python experiments/run_neuralFG.py config_train_size.ini
-python experiments/run_survboost.py config_train_size.ini
+python experiments/run_dkaj.py config/dkaj_train_size.ini
+python experiments/run_csCox.py config/baseline_train_size.ini
+python experiments/run_FG.py config/baseline_train_size.ini
+python experiments/run_rsfcr.py config/baseline_train_size.ini
+python experiments/run_deephit.py config/baseline_train_size.ini
+python experiments/run_dsm.py config/baseline_train_size.ini
+python experiments/run_neuralFG.py config/baseline_train_size.ini
+python experiments/run_survboost.py config/baseline_train_size.ini
 ```
 
 
@@ -122,7 +122,7 @@ Test DKAJ without specific components:
 #### Without Leave-One-Out Loss
 
 ```bash
-python experiments/run_dkaj_no_loo.py config_dkaj.ini
+python experiments/run_dkaj_no_loo.py config/dkaj.ini
 ```
 
 This variant removes the leave-one-out adjustment to evaluate its contribution.
@@ -130,7 +130,7 @@ This variant removes the leave-one-out adjustment to evaluate its contribution.
 #### Without TUNA Warm-up
 
 ```bash
-python experiments/run_dkaj_no_tuna.py config_dkaj.ini
+python experiments/run_dkaj_no_tuna.py config/dkaj.ini
 ```
 
 This variant trains the neural network from scratch without TUNA initialization.
@@ -167,6 +167,11 @@ We report:
 ├── modelsR.py                      # Utilities for models implemented in R
 ├── metrics.py                      # Evaluation metrics
 ├── visualization_utils.py          # Plotting utilities
+├── config/                         # Config files directory
+│   ├── dkaj.ini                        # DKAJ config
+│   ├── baseline.ini                    # Baselines config
+│   ├── dkaj_train_size.ini             # DKAJ config with varying training set sizes
+│   ├── baseline_train_size.ini         # Baselines config with varying training set sizes
 ├── data/                           # Data directory
 │   ├── framingham.csv                  # Framingham dataset
 │   ├── pbc2.csv                        # PBC dataset
