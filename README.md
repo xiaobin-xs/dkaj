@@ -167,17 +167,20 @@ We report:
 ├── modelsR.py                      # Utilities for models implemented in R
 ├── metrics.py                      # Evaluation metrics
 ├── visualization_utils.py          # Plotting utilities
+├── data/                           # Data directory
+│   ├── framingham.csv                  # Framingham dataset
+│   ├── pbc2.csv                        # PBC dataset
 ├── experiments/                    # Experiment runners
-│   ├── run_dkaj.py                 # Main DKAJ experiment
-│   ├── run_dkaj_no_loo.py          # DKAJ without LOO loss
-│   ├── run_dkaj_no_tuna.py         # DKAJ without TUNA warm-up
-│   ├── run_csCox.py                # Cause-specific Cox baseline
-│   ├── run_FG.py                   # Fine–Gray baseline
-│   ├── run_rsfcr.py                # RSF-CR baseline
-│   ├── run_deephit.py              # DeepHit baseline
-│   ├── run_dsm.py                  # Deep Survival Machines baseline
-│   ├── run_neuralFG.py             # Neural Fine–Gray baseline
-│   └── run_survboost.py            # SurvivalBoost baseline
+│   ├── run_dkaj.py                     # Main DKAJ experiment
+│   ├── run_dkaj_no_loo.py              # DKAJ without LOO loss
+│   ├── run_dkaj_no_tuna.py             # DKAJ without TUNA warm-up
+│   ├── run_csCox.py                    # Cause-specific Cox baseline
+│   ├── run_FG.py                       # Fine–Gray baseline
+│   ├── run_rsfcr.py                    # RSF-CR baseline
+│   ├── run_deephit.py                  # DeepHit baseline
+│   ├── run_dsm.py                      # Deep Survival Machines baseline
+│   ├── run_neuralFG.py                 # Neural Fine–Gray baseline
+│   └── run_survboost.py                # SurvivalBoost baseline
 ├── dsm/                            # Deep Survival Machines implementation
 ├── nfg/                            # Neural Fine–Gray implementation
 ├── pycox/                          # PyCox moduel with minor modification
