@@ -38,19 +38,6 @@ def neg_cindex_td(y_true, d_true, surv_pred, exact=True, n_subsamples=None,
     return -np.mean(c_indices)
 
 
-# Section 4.1  Performance metrics in "Random survival forests for competing risks"
-# Hemant Ishwaran, Thomas A. Gerds, Udaya B. Kogalur, Richard D. Moore, Stephen J. Gange, Bryan M. Lau, 
-def c_index_competing_single_time(event_times, predicted_scores, event_observed, event_of_interest=1):
-    '''
-    Compute the concordance index for competing risks.
-    Args:
-        event_times: (n,) array of event times
-        predicted_scores: (n, k) array of predicted scores
-        event_observed: (n,) array of event observed indicator
-        event_of_interest: int, the event of interest
-    '''
-    raise NotImplementedError(f"Not implemented yet")
-
 def compute_brier_competing_single_time(cif_values_at_time_horizon, censoring_kmf,
                             Y_test, D_test, event_of_interest, time_horizon):
     '''

@@ -33,7 +33,7 @@ from datasets import load_dataset, LabTransformCR
 from models import SurvivalBoostWrap, hist_gradient_boosting_classifier_apply
 from models import create_base_neural_net_with_hypersphere, tuna_loss
 from models import DKAJ, DKAJSummaryLoss, DKAJSummary
-from metrics import neg_cindex_td, c_index_competing_single_time, compute_brier_competing_multiple_times, compute_ibs_competing
+from metrics import neg_cindex_td, compute_brier_competing_multiple_times, compute_ibs_competing
 
 LOO = False # whether to use leave-one-out when computing the kernel weights in DKAJ
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -67,11 +67,6 @@ assert model_selection_metric in ['avgIBS', 'avgCtd'],\
     f"model selection metric must be either 'avgIBS' or 'avgCtd', got {model_selection_metric}"
 
 n_neighbors_range = ast.literal_eval(config['DEFAULT']['ANN_max_n_neighbors'])
-
-compute_bootstrap_CI = int(config['DEFAULT']['compute_bootstrap_CI']) > 0
-bootstrap_CI_coverage = float(config['DEFAULT']['bootstrap_CI_coverage'])
-bootstrap_n_samples = int(config['DEFAULT']['bootstrap_n_samples'])
-bootstrap_random_seed = int(config['DEFAULT']['bootstrap_random_seed'])
 
 tuna_random_seed = int(config['DEFAULT']['tuna_random_seed'])
 
@@ -180,22 +175,14 @@ output_test_table_filename \
                       finetune_summaries))
 output_test_table_file = open(output_test_table_filename, 'w')
 test_csv_writer = csv.writer(output_test_table_file)
-if compute_bootstrap_CI:
-    test_csv_writer.writerow(['dataset',
-                              'experiment_idx',
-                              'method',
-                              'loss',
-                              'loss_CI_lower',
-                              'loss_CI_upper'])
-else:
-    test_csv_writer.writerow(['dataset',
-                              'experiment_idx',
-                              'method',
-                              'test_avg_IBS',
-                              'test_IBS',
-                              'test_cindex_td'] + \
-                             [f'test_BS_q{int(q*100)}' for q in eval_horizon_quantiles] + \
-                             [f'test_cr_cindex_q{int(q*100)}' for q in eval_horizon_quantiles])
+test_csv_writer.writerow(['dataset',
+                            'experiment_idx',
+                            'method',
+                            'test_avg_IBS',
+                            'test_IBS',
+                            'test_cindex_td'] + \
+                            [f'test_BS_q{int(q*100)}' for q in eval_horizon_quantiles] + \
+                            [f'test_cr_cindex_q{int(q*100)}' for q in eval_horizon_quantiles])
 
 for experiment_idx in range(n_experiment_repeats):
     for dataset in datasets:
@@ -1127,11 +1114,7 @@ for experiment_idx in range(n_experiment_repeats):
                 Y_test_np, D_test_np, e_idx_minus_1+1, cif_ibs_df.index)
             cindex_td = -neg_cindex_td(Y_test_np, (D_test_np==e_idx_minus_1+1).astype(int), 
                                        (-cif_ibs_df.values, cif_ibs_df.index), exact=False)
-            eval_cindex_cr = [0
-                # c_index_competing_single_time(
-                # Y_test_np, cif_eval_df.values[h, :], 
-                # D_test_np, e_idx_minus_1+1) 
-                for h in range(len(eval_horizons))]
+            eval_cindex_cr = [0 for h in range(len(eval_horizons))] # not implemented
             test_eval_brier_scores_all_events.append(eval_brier_scores)
             test_ibs_all_events.append(ibs)
             test_cindex_td_all_events.append(cindex_td)
