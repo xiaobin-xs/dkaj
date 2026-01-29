@@ -21,6 +21,43 @@ This repository contains:
 - Experiment runners and configuration files for reproducing paper results
 
 
+## Project Structure
+
+```
+.
+├── dkaj_train_demo.ipynb           # Interactive tutorial
+├── datasets.py                     # Dataset loading and preprocessing
+├── models.py                       # Model implementations (DKAJ, baselines, etc.)
+├── modelsR.py                      # Utilities for models implemented in R
+├── metrics.py                      # Evaluation metrics
+├── visualization_utils.py          # Plotting utilities
+├── config/                         # Config files directory
+│   ├── dkaj.ini                        # DKAJ config
+│   ├── baseline.ini                    # Baselines config
+│   ├── dkaj_train_size.ini             # DKAJ config with varying training set sizes
+│   ├── baseline_train_size.ini         # Baselines config with varying training set sizes
+├── data/                           # Data directory
+│   ├── framingham.csv                  # Framingham dataset
+│   ├── pbc2.csv                        # PBC dataset
+├── experiments/                    # Experiment runners
+│   ├── run_dkaj.py                     # Main DKAJ experiment
+│   ├── run_dkaj_no_loo.py              # DKAJ without LOO loss
+│   ├── run_dkaj_no_tuna.py             # DKAJ without TUNA warm-up
+│   ├── run_csCox.py                    # Cause-specific Cox baseline
+│   ├── run_FG.py                       # Fine–Gray baseline
+│   ├── run_rsfcr.py                    # RSF-CR baseline
+│   ├── run_deephit.py                  # DeepHit baseline
+│   ├── run_dsm.py                      # Deep Survival Machines baseline
+│   ├── run_neuralFG.py                 # Neural Fine–Gray baseline
+│   └── run_survboost.py                # SurvivalBoost baseline
+├── dsm/                            # Deep Survival Machines implementation
+├── nfg/                            # Neural Fine–Gray implementation
+├── pycox/                          # PyCox moduel with minor modification
+└── torchtuples/                    # torchtuples moduel with minor modification
+```
+
+
+
 ## Installation
 
 ### Requirements
@@ -65,13 +102,6 @@ The notebook demonstrates the complete DKAJ pipeline on the Framingham dataset:
 ### 2. Reproducing experiments (paper)
 
 Experiment scripts read hyperparameters and dataset settings from config files.
-
-#### Main Config Files
-
-- **`dkaj.ini`**: Default DKAJ configuration (multiple datasets, parameter grids)
-- **`dkaj_train_size.ini`**: DKAJ configuration with varying training set sizes
-- **`baseline.ini`**: Standard baseline methods configuration
-- **`baseline_train_size.ini`**: Baseline methods with varying training set sizes
 
 #### Full DKAJ Pipeline
 
@@ -155,42 +185,6 @@ See `datasets.py` for details on how data is loaded and preprocessed.
 We report:
 - Time-dependent concordance index (C-td)
 - Integrated Brier score (IBS) for competing risks
-
-
-## Project Structure
-
-```
-.
-├── dkaj_train_demo.ipynb           # Interactive tutorial
-├── datasets.py                     # Dataset loading and preprocessing
-├── models.py                       # Model implementations (DKAJ, baselines, etc.)
-├── modelsR.py                      # Utilities for models implemented in R
-├── metrics.py                      # Evaluation metrics
-├── visualization_utils.py          # Plotting utilities
-├── config/                         # Config files directory
-│   ├── dkaj.ini                        # DKAJ config
-│   ├── baseline.ini                    # Baselines config
-│   ├── dkaj_train_size.ini             # DKAJ config with varying training set sizes
-│   ├── baseline_train_size.ini         # Baselines config with varying training set sizes
-├── data/                           # Data directory
-│   ├── framingham.csv                  # Framingham dataset
-│   ├── pbc2.csv                        # PBC dataset
-├── experiments/                    # Experiment runners
-│   ├── run_dkaj.py                     # Main DKAJ experiment
-│   ├── run_dkaj_no_loo.py              # DKAJ without LOO loss
-│   ├── run_dkaj_no_tuna.py             # DKAJ without TUNA warm-up
-│   ├── run_csCox.py                    # Cause-specific Cox baseline
-│   ├── run_FG.py                       # Fine–Gray baseline
-│   ├── run_rsfcr.py                    # RSF-CR baseline
-│   ├── run_deephit.py                  # DeepHit baseline
-│   ├── run_dsm.py                      # Deep Survival Machines baseline
-│   ├── run_neuralFG.py                 # Neural Fine–Gray baseline
-│   └── run_survboost.py                # SurvivalBoost baseline
-├── dsm/                            # Deep Survival Machines implementation
-├── nfg/                            # Neural Fine–Gray implementation
-├── pycox/                          # PyCox moduel with minor modification
-└── torchtuples/                    # torchtuples moduel with minor modification
-```
 
 
 
