@@ -27,7 +27,9 @@ This repository contains:
 
 ```
 .
-├── dkaj_train_demo.ipynb           # Interactive tutorial
+├── demo_dkaj_train.ipynb           # Interactive demo for DKAJ training
+├── demo_dkaj_visualization.ipynb   # Interactive demo for DKAJ visualization
+├── demo_visualization_data/        # Directory that stores the data used in the visualization demo
 ├── datasets.py                     # Dataset loading and preprocessing
 ├── models.py                       # Model implementations (DKAJ, baselines, etc.)
 ├── modelsR.py                      # Utilities for models implemented in R
@@ -59,27 +61,21 @@ This repository contains:
 ```
 
 
-
 ## Installation
 
 ### Requirements
 - Python 3.7+
-- PyTorch
-- scikit-learn
-- lifelines
-- hazardous
-- hnswlib
+- See `requirements.txt` for pinned dependencies (NumPy/Pandas/SciPy, scikit-learn, PyTorch, lifelines, hazardous, hnswlib, numba, rpy2, matplotlib, seaborn, h5py).
 
 ### Setup
-
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Third-party code
-This repo vendors code from the following sources:
+This repository includes vendored third-party code:
 - `dsm/` and `nfg/`: Deep Survival Machines and Neural Fine-Gray implementations referenced from [here](https://github.com/Jeanselme/DeepSurvivalMachines/tree/e4b07b3f497f2266eaa71d0e182195e95663d367/dsm) and [here](https://github.com/Jeanselme/NeuralFineGray/tree/main/nfg) 
-- `pycox/` and `torchtuples/`: slightly modified versions of PyCox and torchtuples borrowed [here](https://github.com/georgehc/survival-kernets)
+- `pycox/` and `torchtuples/`: slightly modified copies of PyCox and torchtuples (so you do not need to install pycox or torchtuples via pip). Source [survival-kernet](https://github.com/georgehc/survival-kernets)
 
 Please see the corresponding directories for original licenses and attribution.
 
