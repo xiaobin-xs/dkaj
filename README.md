@@ -81,20 +81,28 @@ Please see the corresponding directories for original licenses and attribution.
 
 ## Quick Start
 
-### 1. Demo Notebook
+### 1. Demo Notebooks
 
-A demo notebook (training + basic evaluation) is provided here:
-- `dkaj_train_demo.ipynb`
+We provide two demo notebooks:
+- `dkaj_train_demo.ipynb` (training + basic evaluation)
+- `dkaj_visualization_demo.ipynb` (cluster-level and individual-level visualizations)
 
-The notebook demonstrates the complete DKAJ pipeline on the Framingham dataset:
-1. Load and preprocess data
-2. Fit SurvivalBoost (base model)
-3. TUNA warm-up of a base neural network using SurvivalBoost leaves
-4. Train DKAJ on top of the warm-started network
-5. Optional summary fine-tuning
-6. Evaluation using time-dependent concordance (C-td) and integrated Brier score (IBS)
+#### dkaj_train_demo.ipynb
+This notebook demonstrates the complete DKAJ pipeline on the Framingham dataset:
+ 1. Load and preprocess data
+ 2. Fit SurvivalBoost (base model)
+ 3. TUNA warm-up of a base neural network using SurvivalBoost leaves
+ 4. Train DKAJ on top of the warm-started network
+ 5. Optional summary fine-tuning
+ 6. Evaluation using time-dependent concordance (C_td) and integrated Brier score (IBS)
 
-- [ ] ToDo: add demo for visualization
+#### dkaj_visualization_demo.ipynb
+This notebook demonstrates how to interpret a trained DKAJ model using the saved visualization artifacts from an example experimental run:
+ 1. Load saved training artifacts (raw covariates, labels, embeddings, exemplar assignments, and the model time grid)
+ 2. Visualize exemplar/cluster structure (e.g., similarity heatmap among training samples)
+ 3. Plot cluster-level Aalen–Johansen CIF curves for each event type
+ 4. Characterize clusters using feature heatmaps (average transformed features within each cluster)
+ 5. Individual-level explanation: decompose a test prediction into top contributing clusters using the kernel weights, and compare cluster-level CIFs with the final predicted CIF
 
 
 ### 2. Reproducing experiments (paper)
